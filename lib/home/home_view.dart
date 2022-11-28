@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'controller/bloc/get_posts_bloc.dart';
 import 'home_model.dart';
 
@@ -76,6 +75,63 @@ class HomeViewState extends State<HomeView>{
     return SingleChildScrollView( 
         child: Column(  
           children:[
+            Padding(
+              padding: const EdgeInsets.only(bottom: 7.5),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(5)),
+                child: ExpansionTile(
+                  collapsedIconColor: Colors.white,
+                  tilePadding: const EdgeInsets.only(top: 10, bottom: 10, left: 5),
+                  leading: const CircleAvatar(backgroundImage: AssetImage('launcher_icon.png'),backgroundColor: Colors.transparent,),
+                  collapsedBackgroundColor: Colors.grey[700],
+                  backgroundColor: Colors.grey[600],
+                  title: Text('View Additonal Subreddits', style: TextStyle(color: Colors.blue[200], fontWeight: FontWeight.bold),),
+                  subtitle: const Text('Tap Here To See Available Options', style: TextStyle(color: Colors.white),),
+                  children: [
+                    ListTile(  
+                      tileColor: Colors.transparent,
+                      title: const Text('Build A PC Sales', style: TextStyle(color: Colors.white),),
+                      subtitle: const Text('A community for links to products that are on sale at various websites. Monitors, cables, processors, video cards, fans, cooling, cases, accessories, anything for a PC build.', style: TextStyle(color: Colors.white),),
+                      leading: const CircleAvatar(  
+                        backgroundImage: NetworkImage('https://styles.redditmedia.com/t5_2s3dh/styles/communityIcon_bf4ya2rtdaz01.png?width=256&s=76feb45fa3beb2c72b1ce635a0cd311dfb5d1cd3'),
+                        backgroundColor: Colors.transparent,
+                      ),
+                      onTap:()=>Navigator.of(context).pushReplacement(newSubredditRoute(const HomeView('buildapcsales'))),
+                    ),
+                    ListTile(  
+                      tileColor: Colors.transparent,
+                      title: const Text('Battlestations', style: TextStyle(color: Colors.white),),
+                      subtitle: const Text('A subreddit for reddit users\' battlestation pictures.', style: TextStyle(color: Colors.white),),
+                      leading: const CircleAvatar(  
+                        backgroundImage: NetworkImage('https://styles.redditmedia.com/t5_2rdbn/styles/communityIcon_cwc65gri69h01.png?width=256&s=81d53ba008cb96e8d57dadf6b130d991411157ad'),
+                        backgroundColor: Colors.transparent,
+                      ),
+                      onTap:()=>Navigator.of(context).pushReplacement(newSubredditRoute(const HomeView('battlestations'))),
+                    ),
+                    ListTile(  
+                      tileColor: Colors.transparent,
+                      title: const Text('Programming', style: TextStyle(color: Colors.white),),
+                      subtitle: const Text('Computer Programming', style: TextStyle(color: Colors.white),),
+                      leading: const CircleAvatar(  
+                        backgroundImage: NetworkImage('https://styles.redditmedia.com/t5_2fwo/styles/communityIcon_1bqa1ibfp8q11.png?width=256&s=45361614cdf4a306d5510b414d18c02603c7dd3c'),
+                        backgroundColor: Colors.transparent,
+                      ),
+                      onTap:()=>Navigator.of(context).pushReplacement(newSubredditRoute(const HomeView('programming'))),
+                    ),
+                    ListTile(  
+                      tileColor: Colors.transparent,
+                      title: const Text('PCMR', style: TextStyle(color: Colors.white),),
+                      subtitle: const Text('Welcome to the official subreddit of the PC Master Race / PCMR! All PC related content is welcome, including build help, tech support, and any doubt one might have about PC ownership. You don\'t necessarily need a PC to be a member of the PCMR. You just have to love PCs. It\'s not about the hardware in your rig, but the software in your heart! Join us in celebrating and promoting tech, knowledge, and the best gaming and working platform. The PC.', style: TextStyle(color: Colors.white),),
+                      leading: const CircleAvatar(  
+                        backgroundImage: NetworkImage('https://styles.redditmedia.com/t5_2sgp1/styles/communityIcon_1mit7n6qhy481.png?width=256&s=b693ef2414ef97485151d9140733c025405e027b'),
+                        backgroundColor: Colors.transparent,
+                      ),
+                      onTap:()=>Navigator.of(context).pushReplacement(newSubredditRoute(const HomeView('pcmasterrace'))),
+                    ),
+                  ],
+                )
+              )
+            ),
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -124,7 +180,7 @@ class HomeViewState extends State<HomeView>{
                 posts.data?.before != null 
                   ? TextButton(  
                       onPressed:(() {
-                        String? previous = 'https://api.reddit.com/r/${widget.subreddit}/.json?count=25&before=${posts.data?.before}';
+                        String? previous = 'https://api.reddit.com/r/${widget.subreddit}/.json';
                         BlocProvider.of<GetPostsBloc>(context).add(GetPostList(previous));
                       }),  
                       child: const Text('Back', style: TextStyle(color: Colors.red),),
@@ -147,6 +203,24 @@ class HomeViewState extends State<HomeView>{
   Widget loadingWidget(){
     return const Center(
       child: CircularProgressIndicator(),
+    );
+  }
+
+  Route newSubredditRoute(Widget subreddit){
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => subreddit,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(0.0, -1.0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
     );
   }
 }
