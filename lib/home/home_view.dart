@@ -139,37 +139,52 @@ class HomeViewState extends State<HomeView>{
               itemBuilder: ((context, index) {
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 7.5),
-                  child: ListTile( 
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                    tileColor: Colors.grey[700],
-                    minVerticalPadding: 10.0,
-                    contentPadding: const EdgeInsets.all(5.0),
-                    leading: CircleAvatar(
-                      backgroundImage: posts.data!.children![index].data!.thumbnail!.contains('https://')
-                        ? NetworkImage(posts.data!.children![index].data!.thumbnail!)
-                        : null,
-                      backgroundColor: Colors.transparent,
-                    ),
-                    title: Text("${posts.data!.children![index].data?.title}", style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
-                    subtitle: FittedBox(
-                      alignment: Alignment.centerLeft,
-                      fit: BoxFit.scaleDown,
-                      child: Text(
-                      "Posted By: ${posts.data!.children![index].data?.author}", 
-                      maxLines: 1, 
-                      style: const TextStyle(color: Colors.white,)
-                    )),  
-                    trailing: FittedBox(  
-                      child: Padding(  
-                        padding: const EdgeInsets.only(right: 10),
-                        child: Row(  
-                          children: [
-                            const Icon(Icons.arrow_upward, color: Colors.green,),
-                            Text('${posts.data!.children![index].data!.ups}', style: const TextStyle(color: Colors.white),)
-                          ],
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5.0),
+                    child: ExpansionTile(  
+                      title: Text("${posts.data!.children![index].data?.title}", style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                      subtitle: FittedBox(
+                        alignment: Alignment.centerLeft,
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                        "Posted By: ${posts.data!.children![index].data?.author}", 
+                        maxLines: 1, 
+                        style: const TextStyle(color: Colors.white,)
                         )
+                      ),  
+                      leading: CircleAvatar(
+                        backgroundImage: posts.data!.children![index].data!.thumbnail!.contains('https://')
+                          ? NetworkImage(posts.data!.children![index].data!.thumbnail!)
+                          : null,
+                        backgroundColor: Colors.transparent,
                       ),
-                    )
+                      trailing: FittedBox(  
+                        child: Padding(  
+                          padding: const EdgeInsets.only(right: 10),
+                          child: Row(  
+                            children: [
+                              const Icon(Icons.arrow_upward, color: Colors.green,),
+                              Text(
+                                posts.data!.children![index].data!.ups! > 1000 
+                                ? '${(posts.data!.children![index].data!.ups! / 1000).toStringAsFixed(1)}k'
+                                : '${posts.data!.children![index].data!.ups}', 
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                              IconButton(
+                                onPressed:(){
+                                  //Navigate to comment section
+                                }, 
+                                icon: const Icon(Icons.list, color: Colors.white,)
+                              )
+                            ],
+                          )
+                        ),
+                      ),
+                      collapsedBackgroundColor: Colors.grey[700],
+                      backgroundColor: Colors.grey[600],
+                      tilePadding: const EdgeInsets.all(5.0),
+                      children:[listTileChildren(posts.data!.children![index].data!)],
+                    ),
                   )
                 );
               })
@@ -222,6 +237,22 @@ class HomeViewState extends State<HomeView>{
         );
       },
     );
+  }
+
+  Widget listTileChildren(ChildData cd){
+    int? numResolutions = cd.preview?.images?[0].resolutions?.length;
+    if(numResolutions != null && numResolutions > 1){
+      return SizedBox( 
+        width: MediaQuery.of(context).size.width, 
+        child: Image.network(
+          cd.preview!.images![0].resolutions![numResolutions-1].url!.replaceAll('amp;', ''),
+          fit: BoxFit.fill,
+        )
+      );
+    }
+    else{
+      return Container();
+    }
   }
 }
 
