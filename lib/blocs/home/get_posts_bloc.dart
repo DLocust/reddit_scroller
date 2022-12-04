@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import '../../home_model.dart';
-import '../../home_service.dart';
+import '../../../models/home_model.dart';
+import '../../../services/home_service.dart';
 
 part 'get_posts_event.dart';
 part 'get_posts_state.dart';

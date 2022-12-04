@@ -1,15 +1,15 @@
 import 'package:flutter/foundation.dart';
-import 'home_model.dart';
+import '../models/comments_model.dart';
 import 'package:http/http.dart' as http;
 
-class HomeService {
-  Future<Posts?> getPosts(String newUrl) async {
+class CommentsService {
+  Future<Comments?> getComments(String newUrl) async {
     try{
       var url = Uri.parse(newUrl);
       var response = await http.get(url);
       if(response.statusCode == 200){
-        Posts posts = postsFromJson(response.body);
-        return posts;
+        Comments comments = commentsFromJson(response.body);
+        return comments;
       }
       else{
         if (kDebugMode) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'controller/bloc/get_posts_bloc.dart';
-import 'home_model.dart';
+import 'package:reddit_scroller/blocs/home/get_posts_bloc.dart';
+import '../models/home_model.dart';
 
 class HomeView extends StatefulWidget{
   final String subreddit;
@@ -80,9 +80,13 @@ class HomeViewState extends State<HomeView>{
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(5)),
                 child: ExpansionTile(
+                  trailing: const Padding( 
+                    padding: EdgeInsets.only(right: 20), 
+                    child: Icon(Icons.expand_more),
+                  ),
                   collapsedIconColor: Colors.white,
                   tilePadding: const EdgeInsets.only(top: 10, bottom: 10, left: 5),
-                  leading: const CircleAvatar(backgroundImage: AssetImage('launcher_icon.png'),backgroundColor: Colors.transparent,),
+                  leading: const CircleAvatar(backgroundImage: AssetImage('assets/icons/launcher_icon.png'),backgroundColor: Colors.transparent,),
                   collapsedBackgroundColor: Colors.grey[700],
                   backgroundColor: Colors.grey[600],
                   title: Text('View Additonal Subreddits', style: TextStyle(color: Colors.blue[200], fontWeight: FontWeight.bold),),
@@ -173,6 +177,7 @@ class HomeViewState extends State<HomeView>{
                               IconButton(
                                 onPressed:(){
                                   //Navigate to comment section
+                                  //print('https://www.reddit.com/${posts.data!.children![index].data!.permalink}.json');
                                 }, 
                                 icon: const Icon(Icons.list, color: Colors.white,)
                               )
