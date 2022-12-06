@@ -20,7 +20,7 @@ class CommentsService {
     }
     catch (e){
       if (kDebugMode) {
-        print('DARIUS LOCUST - An Error Has Occured: $e');
+        print('DARIUS LOCUST - An Error Has Occurred: $e');
       }
     }
     return null;

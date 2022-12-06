@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reddit_scroller/blocs/home/get_posts_bloc.dart';
+import 'package:reddit_scroller/views/comments_view.dart';
 import '../models/home_model.dart';
 
 class HomeView extends StatefulWidget{
@@ -176,9 +177,8 @@ class HomeViewState extends State<HomeView>{
                               ),
                               IconButton(
                                 onPressed:(){
-                                  //Navigate to comment section
-                                  //print('https://www.reddit.com/${posts.data!.children![index].data!.permalink}.json');
-                                }, 
+                                  Navigator.of(context).push(commentsRoute('https://www.reddit.com/${posts.data!.children![index].data!.permalink}.json?sort=top'));
+                                },
                                 icon: const Icon(Icons.list, color: Colors.white,)
                               )
                             ],
@@ -231,6 +231,24 @@ class HomeViewState extends State<HomeView>{
       pageBuilder: (context, animation, secondaryAnimation) => subreddit,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         const begin = Offset(0.0, -1.0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
+    );
+  }
+
+  Route commentsRoute(String commentsUrl){
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => CommentsView(commentsUrl),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(1.0, 0.0);
         const end = Offset.zero;
         const curve = Curves.ease;
 

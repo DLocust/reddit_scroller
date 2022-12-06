@@ -1,37 +1,37 @@
 import 'dart:convert';
 
-Comments commentsFromJson(String str) => Comments.fromJson(json.decode(str));
+Comments commentsFromJson(String str) => Comments.fromJson(json.decode(str)[1]);
 
 String commentsToJson(Comments data) => json.encode(data.toJson());
 
 class Comments {
   Comments({
-      this.kind,
-      this.data,
+    this.kind,
+    this.data,
   });
 
   String? kind;
   CommentData? data;
 
-  factory Comments.fromJson(Map<String, dynamic> json) => Comments(
-      kind: json["kind"],
-      data: CommentData.fromJson(json["data"]),
+  factory Comments.fromJson(Map<String, dynamic>?json) => Comments(
+    kind: json?["kind"],
+    data: CommentData.fromJson(json?["data"]),
   );
 
-  Map<String, dynamic> toJson() => {
-      "kind": kind,
-      "data":  data == null ? null : data!.toJson(),
+  Map<String, dynamic>?toJson() => {
+    "kind": kind,
+    "data":  data == null ? null : data!.toJson(),
   };
 }
 
 class CommentData {
   CommentData({
-      this.after,
-      this.dist,
-      this.modhash,
-      this.geoFilter,
-      this.children,
-      this.before,
+    this.after,
+    this.dist,
+    this.modhash,
+    this.geoFilter,
+    this.children,
+    this.before,
   });
 
   dynamic after;
@@ -41,42 +41,42 @@ class CommentData {
   List<Child>? children;
   dynamic before;
 
-  factory CommentData.fromJson(Map<String, dynamic> json) => CommentData(
-      after: json["after"],
-      dist: json["dist"],
-      modhash: json["modhash"],
-      geoFilter: json["geo_filter"],
-      children: List<Child>.from(json["children"].map((x) => Child.fromJson(x))),
-      before: json["before"],
+  factory CommentData.fromJson(Map<String, dynamic>?json) => CommentData(
+    after: json?["after"],
+    dist: json?["dist"],
+    modhash: json?["modhash"],
+    geoFilter: json?["geo_filter"],
+    children: List<Child>.from(json?["children"].map((x) => Child.fromJson(x))),
+    before: json?["before"],
   );
 
-  Map<String, dynamic> toJson() => {
-      "after": after,
-      "dist": dist,
-      "modhash": modhash,
-      "geo_filter": geoFilter,
-      "children": List<dynamic>.from(children!.map((x) => x.toJson())),
-      "before": before,
+  Map<String, dynamic>?toJson() => {
+    "after": after,
+    "dist": dist,
+    "modhash": modhash,
+    "geo_filter": geoFilter,
+    "children": List<dynamic>.from(children!.map((x) => x.toJson())),
+    "before": before,
   };
 }
 
 class Child {
   Child({
-      this.kind,
-      this.data,
+    this.kind,
+    this.data,
   });
 
   String? kind;
   Data? data;
 
-  factory Child.fromJson(Map<String, dynamic> json) => Child(
-      kind: json["kind"],
-      data: Data.fromJson(json["data"]),
+  factory Child.fromJson(Map<String, dynamic>?json) => Child(
+    kind: json?["kind"],
+    data: Data.fromJson(json?["data"]),
   );
 
-  Map<String, dynamic> toJson() => {
-      "kind": kind,
-      "data": data == null ? null : data!.toJson(),
+  Map<String, dynamic>?toJson() => {
+    "kind": kind,
+    "data": data == null ? null : data!.toJson(),
   };
 }
 
@@ -85,7 +85,6 @@ class Data {
     this.approvedAtUtc,
     this.subreddit,
     this.selftext,
-    this.userReports,
     this.saved,
     this.modReasonTitle,
     this.gilded,
@@ -128,7 +127,6 @@ class Data {
     this.thumbnail,
     this.edited,
     this.authorFlairCssClass,
-    this.authorFlairRichtext,
     this.gildings,
     this.contentCategories,
     this.isSelf,
@@ -152,15 +150,12 @@ class Data {
     this.isCrosspostable,
     this.pinned,
     this.over18,
-    this.allAwardings,
-    this.awarders,
     this.mediaOnly,
     this.linkFlairTemplateId,
     this.canGild,
     this.spoiler,
     this.locked,
     this.authorFlairText,
-    this.treatmentTags,
     this.visited,
     this.removedBy,
     this.numReports,
@@ -189,7 +184,6 @@ class Data {
     this.subredditSubscribers,
     this.createdUtc,
     this.numCrossposts,
-    this.modReports,
     this.isVideo,
     this.commentType,
     this.replies,
@@ -212,24 +206,23 @@ class Data {
   dynamic approvedAtUtc;
   String? subreddit;
   String? selftext;
-  List<dynamic>? userReports;
-  bool? saved;
+  dynamic saved;
   dynamic modReasonTitle;
   int? gilded;
-  bool? clicked;
+  dynamic clicked;
   String? title;
   List<LinkFlairRichtext>? linkFlairRichtext;
   String? subredditNamePrefixed;
-  bool? hidden;
+  dynamic hidden;
   int? pwls;
   String? linkFlairCssClass;
   int? downs;
   dynamic thumbnailHeight;
   dynamic topAwardedType;
   String? parentWhitelistStatus;
-  bool? hideScore;
+  dynamic hideScore;
   String? name;
-  bool? quarantine;
+  dynamic quarantine;
   String? linkFlairTextColor;
   double? upvoteRatio;
   dynamic authorFlairBackgroundColor;
@@ -239,26 +232,25 @@ class Data {
   Gildings? mediaEmbed;
   dynamic thumbnailWidth;
   dynamic authorFlairTemplateId;
-  bool? isOriginalContent;
+  dynamic isOriginalContent;
   String? authorFullname;
   dynamic secureMedia;
-  bool? isRedditMediaDomain;
-  bool? isMeta;
+  dynamic isRedditMediaDomain;
+  dynamic isMeta;
   dynamic category;
   Gildings? secureMediaEmbed;
   String? linkFlairText;
-  bool? canModPost;
+  dynamic canModPost;
   int? score;
   dynamic approvedBy;
-  bool? isCreatedFromAdsUi;
-  bool? authorPremium;
+  dynamic isCreatedFromAdsUi;
+  dynamic authorPremium;
   String? thumbnail;
-  bool? edited;
+  dynamic edited;
   dynamic authorFlairCssClass;
-  List<dynamic>? authorFlairRichtext;
   Gildings? gildings;
   dynamic contentCategories;
-  bool? isSelf;
+  dynamic isSelf;
   dynamic modNote;
   int? created;
   String? linkFlairType;
@@ -267,207 +259,196 @@ class Data {
   dynamic bannedBy;
   String? authorFlairType;
   String? domain;
-  bool? allowLiveComments;
+  dynamic allowLiveComments;
   dynamic selftextHtml;
   dynamic likes;
   dynamic suggestedSort;
   dynamic bannedAtUtc;
   String? urlOverriddenByDest;
   dynamic viewCount;
-  bool? archived;
-  bool? noFollow;
-  bool? isCrosspostable;
-  bool? pinned;
-  bool? over18;
-  List<dynamic>? allAwardings;
-  List<dynamic>? awarders;
-  bool? mediaOnly;
+  dynamic archived;
+  dynamic noFollow;
+  dynamic isCrosspostable;
+  dynamic pinned;
+  dynamic over18;
+  dynamic mediaOnly;
   String? linkFlairTemplateId;
-  bool? canGild;
-  bool? spoiler;
-  bool? locked;
+  dynamic canGild;
+  dynamic spoiler;
+  dynamic locked;
   dynamic authorFlairText;
-  List<dynamic>? treatmentTags;
-  bool? visited;
+  dynamic visited;
   dynamic removedBy;
   dynamic numReports;
   String? distinguished;
   String? subredditId;
-  bool? authorIsBlocked;
+  dynamic authorIsBlocked;
   dynamic modReasonBy;
   dynamic removalReason;
   String? linkFlairBackgroundColor;
   String? id;
-  bool? isRobotIndexable;
+  dynamic isRobotIndexable;
   int? numDuplicates;
   dynamic reportReasons;
   String? author;
   dynamic discussionType;
   int? numComments;
-  bool? sendReplies;
+  dynamic sendReplies;
   dynamic media;
-  bool? contestMode;
-  bool? authorPatreonFlair;
+  dynamic contestMode;
+  dynamic authorPatreonFlair;
   dynamic authorFlairTextColor;
   String? permalink;
   String? whitelistStatus;
-  bool? stickied;
+  dynamic stickied;
   String? url;
   int? subredditSubscribers;
   int? createdUtc;
   int? numCrossposts;
-  List<dynamic>? modReports;
-  bool? isVideo;
+  dynamic isVideo;
   dynamic commentType;
   dynamic replies;
   String? collapsedReasonCode;
   String? parentId;
-  bool? collapsed;
+  dynamic collapsed;
   String? body;
-  bool? isSubmitter;
+  dynamic isSubmitter;
   String? bodyHtml;
   String? collapsedReason;
   dynamic associatedAward;
   dynamic unrepliableReason;
-  bool? scoreHidden;
+  dynamic scoreHidden;
   String? linkId;
   int? controversiality;
   int? depth;
   dynamic collapsedBecauseCrowdControl;
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
-    approvedAtUtc: json["approved_at_utc"],
-    subreddit: json["subreddit"],
-    selftext: json["selftext"],
-    userReports: List<dynamic>.from(json["user_reports"].map((x) => x)),
-    saved: json["saved"],
-    modReasonTitle: json["mod_reason_title"],
-    gilded: json["gilded"],
-    clicked: json["clicked"],
-    title: json["title"],
-    linkFlairRichtext: json["link_flair_richtext"] == null ? null : List<LinkFlairRichtext>.from(json["link_flair_richtext"].map((x) => LinkFlairRichtext.fromJson(x))),
-    subredditNamePrefixed: json["subreddit_name_prefixed"],
-    hidden: json["hidden"],
-    pwls: json["pwls"],
-    linkFlairCssClass: json["link_flair_css_class"],
-    downs: json["downs"],
-    thumbnailHeight: json["thumbnail_height"],
-    topAwardedType: json["top_awarded_type"],
-    parentWhitelistStatus: json["parent_whitelist_status"],
-    hideScore: json["hide_score"],
-    name: json["name"],
-    quarantine: json["quarantine"],
-    linkFlairTextColor: json["link_flair_text_color"],
-    upvoteRatio: json["upvote_ratio"].toDouble(),
-    authorFlairBackgroundColor: json["author_flair_background_color"],
-    subredditType: json["subreddit_type"],
-    ups: json["ups"],
-    totalAwardsReceived: json["total_awards_received"],
-    mediaEmbed: json["media_embed"] == null ? null : Gildings.fromJson(json["media_embed"]),
-    thumbnailWidth: json["thumbnail_width"],
-    authorFlairTemplateId: json["author_flair_template_id"],
-    isOriginalContent: json["is_original_content"],
-    authorFullname: json["author_fullname"],
-    secureMedia: json["secure_media"],
-    isRedditMediaDomain: json["is_reddit_media_domain"],
-    isMeta: json["is_meta"],
-    category: json["category"],
-    secureMediaEmbed: json["secure_media_embed"] == null ? null : Gildings.fromJson(json["secure_media_embed"]),
-    linkFlairText: json["link_flair_text"],
-    canModPost: json["can_mod_post"],
-    score: json["score"],
-    approvedBy: json["approved_by"],
-    isCreatedFromAdsUi: json["is_created_from_ads_ui"],
-    authorPremium: json["author_premium"],
-    thumbnail: json["thumbnail"],
-    edited: json["edited"],
-    authorFlairCssClass: json["author_flair_css_class"],
-    authorFlairRichtext: List<dynamic>.from(json["author_flair_richtext"].map((x) => x)),
-    gildings: Gildings.fromJson(json["gildings"]),
-    contentCategories: json["content_categories"],
-    isSelf: json["is_self"],
-    modNote: json["mod_note"],
-    created: json["created"],
-    linkFlairType: json["link_flair_type"],
-    wls: json["wls"],
-    removedByCategory: json["removed_by_category"],
-    bannedBy: json["banned_by"],
-    authorFlairType: json["author_flair_type"],
-    domain: json["domain"],
-    allowLiveComments: json["allow_live_comments"],
-    selftextHtml: json["selftext_html"],
-    likes: json["likes"],
-    suggestedSort: json["suggested_sort"],
-    bannedAtUtc: json["banned_at_utc"],
-    urlOverriddenByDest: json["url_overridden_by_dest"],
-    viewCount: json["view_count"],
-    archived: json["archived"],
-    noFollow: json["no_follow"],
-    isCrosspostable: json["is_crosspostable"],
-    pinned: json["pinned"],
-    over18: json["over_18"],
-    allAwardings: List<dynamic>.from(json["all_awardings"].map((x) => x)),
-    awarders: List<dynamic>.from(json["awarders"].map((x) => x)),
-    mediaOnly: json["media_only"],
-    linkFlairTemplateId: json["link_flair_template_id"],
-    canGild: json["can_gild"],
-    spoiler: json["spoiler"],
-    locked: json["locked"],
-    authorFlairText: json["author_flair_text"],
-    treatmentTags: List<dynamic>.from(json["treatment_tags"].map((x) => x)),
-    visited: json["visited"],
-    removedBy: json["removed_by"],
-    numReports: json["num_reports"],
-    distinguished: json["distinguished"],
-    subredditId: json["subreddit_id"],
-    authorIsBlocked: json["author_is_blocked"],
-    modReasonBy: json["mod_reason_by"],
-    removalReason: json["removal_reason"],
-    linkFlairBackgroundColor: json["link_flair_background_color"],
-    id: json["id"],
-    isRobotIndexable: json["is_robot_indexable"],
-    numDuplicates: json["num_duplicates"],
-    reportReasons: json["report_reasons"],
-    author: json["author"],
-    discussionType: json["discussion_type"],
-    numComments: json["num_comments"],
-    sendReplies: json["send_replies"],
-    media: json["media"],
-    contestMode: json["contest_mode"],
-    authorPatreonFlair: json["author_patreon_flair"],
-    authorFlairTextColor: json["author_flair_text_color"],
-    permalink: json["permalink"],
-    whitelistStatus: json["whitelist_status"],
-    stickied: json["stickied"],
-    url: json["url"],
-    subredditSubscribers: json["subreddit_subscribers"],
-    createdUtc: json["created_utc"],
-    numCrossposts: json["num_crossposts"],
-    modReports: List<dynamic>.from(json["mod_reports"].map((x) => x)),
-    isVideo: json["is_video"],
-    commentType: json["comment_type"],
-    replies: json["replies"],
-    collapsedReasonCode: json["collapsed_reason_code"],
-    parentId: json["parent_id"],
-    collapsed: json["collapsed"],
-    body: json["body"],
-    isSubmitter: json["is_submitter"],
-    bodyHtml: json["body_html"],
-    collapsedReason: json["collapsed_reason"],
-    associatedAward: json["associated_award"],
-    unrepliableReason: json["unrepliable_reason"],
-    scoreHidden: json["score_hidden"],
-    linkId: json["link_id"],
-    controversiality: json["controversiality"],
-    depth: json["depth"],
-    collapsedBecauseCrowdControl: json["collapsed_because_crowd_control"],
+  factory Data.fromJson(Map<String, dynamic>?json) => Data(
+    approvedAtUtc: json?["approved_at_utc"],
+    subreddit: json?["subreddit"],
+    selftext: json?["selftext"],
+    saved: json?["saved"],
+    modReasonTitle: json?["mod_reason_title"],
+    gilded: json?["gilded"],
+    clicked: json?["clicked"],
+    title: json?["title"],
+    linkFlairRichtext: json?["link_flair_richtext"] == null ? null : List<LinkFlairRichtext>.from(json?["link_flair_richtext"].map((x) => LinkFlairRichtext.fromJson(x))),
+    subredditNamePrefixed: json?["subreddit_name_prefixed"],
+    hidden: json?["hidden"],
+    pwls: json?["pwls"],
+    linkFlairCssClass: json?["link_flair_css_class"],
+    downs: json?["downs"],
+    thumbnailHeight: json?["thumbnail_height"],
+    topAwardedType: json?["top_awarded_type"],
+    parentWhitelistStatus: json?["parent_whitelist_status"],
+    hideScore: json?["hide_score"],
+    name: json?["name"],
+    quarantine: json?["quarantine"],
+    linkFlairTextColor: json?["link_flair_text_color"],
+    upvoteRatio: json?["upvote_ratio"],
+    authorFlairBackgroundColor: json?["author_flair_background_color"],
+    subredditType: json?["subreddit_type"],
+    ups: json?["ups"],
+    totalAwardsReceived: json?["total_awards_received"],
+    mediaEmbed: json?["media_embed"] == null ? null : Gildings.fromJson(json?["media_embed"]),
+    thumbnailWidth: json?["thumbnail_width"],
+    authorFlairTemplateId: json?["author_flair_template_id"],
+    isOriginalContent: json?["is_original_content"],
+    authorFullname: json?["author_fullname"],
+    secureMedia: json?["secure_media"],
+    isRedditMediaDomain: json?["is_reddit_media_domain"],
+    isMeta: json?["is_meta"],
+    category: json?["category"],
+    secureMediaEmbed: json?["secure_media_embed"] == null ? null : Gildings.fromJson(json?["secure_media_embed"]),
+    linkFlairText: json?["link_flair_text"],
+    canModPost: json?["can_mod_post"],
+    score: json?["score"],
+    approvedBy: json?["approved_by"],
+    isCreatedFromAdsUi: json?["is_created_from_ads_ui"],
+    authorPremium: json?["author_premium"],
+    thumbnail: json?["thumbnail"],
+    edited: json?["edited"],
+    authorFlairCssClass: json?["author_flair_css_class"],
+    gildings: Gildings.fromJson(json?["gildings"]),
+    contentCategories: json?["content_categories"],
+    isSelf: json?["is_self"],
+    modNote: json?["mod_note"],
+    created: json?["created"],
+    linkFlairType: json?["link_flair_type"],
+    wls: json?["wls"],
+    removedByCategory: json?["removed_by_category"],
+    bannedBy: json?["banned_by"],
+    authorFlairType: json?["author_flair_type"],
+    domain: json?["domain"],
+    allowLiveComments: json?["allow_live_comments"],
+    selftextHtml: json?["selftext_html"],
+    likes: json?["likes"],
+    suggestedSort: json?["suggested_sort"],
+    bannedAtUtc: json?["banned_at_utc"],
+    urlOverriddenByDest: json?["url_overridden_by_dest"],
+    viewCount: json?["view_count"],
+    archived: json?["archived"],
+    noFollow: json?["no_follow"],
+    isCrosspostable: json?["is_crosspostable"],
+    pinned: json?["pinned"],
+    over18: json?["over_18"],
+    mediaOnly: json?["media_only"],
+    linkFlairTemplateId: json?["link_flair_template_id"],
+    canGild: json?["can_gild"],
+    spoiler: json?["spoiler"],
+    locked: json?["locked"],
+    authorFlairText: json?["author_flair_text"],
+    visited: json?["visited"],
+    removedBy: json?["removed_by"],
+    numReports: json?["num_reports"],
+    distinguished: json?["distinguished"],
+    subredditId: json?["subreddit_id"],
+    authorIsBlocked: json?["author_is_blocked"],
+    modReasonBy: json?["mod_reason_by"],
+    removalReason: json?["removal_reason"],
+    linkFlairBackgroundColor: json?["link_flair_background_color"],
+    id: json?["id"],
+    isRobotIndexable: json?["is_robot_indexable"],
+    numDuplicates: json?["num_duplicates"],
+    reportReasons: json?["report_reasons"],
+    author: json?["author"],
+    discussionType: json?["discussion_type"],
+    numComments: json?["num_comments"],
+    sendReplies: json?["send_replies"],
+    media: json?["media"],
+    contestMode: json?["contest_mode"],
+    authorPatreonFlair: json?["author_patreon_flair"],
+    authorFlairTextColor: json?["author_flair_text_color"],
+    permalink: json?["permalink"],
+    whitelistStatus: json?["whitelist_status"],
+    stickied: json?["stickied"],
+    url: json?["url"],
+    subredditSubscribers: json?["subreddit_subscribers"],
+    createdUtc: json?["created_utc"],
+    numCrossposts: json?["num_crossposts"],
+    isVideo: json?["is_video"],
+    commentType: json?["comment_type"],
+    replies: json?["replies"],
+    collapsedReasonCode: json?["collapsed_reason_code"],
+    parentId: json?["parent_id"],
+    collapsed: json?["collapsed"],
+    body: json?["body"],
+    isSubmitter: json?["is_submitter"],
+    bodyHtml: json?["body_html"],
+    collapsedReason: json?["collapsed_reason"],
+    associatedAward: json?["associated_award"],
+    unrepliableReason: json?["unrepliable_reason"],
+    scoreHidden: json?["score_hidden"],
+    linkId: json?["link_id"],
+    controversiality: json?["controversiality"],
+    depth: json?["depth"],
+    collapsedBecauseCrowdControl: json?["collapsed_because_crowd_control"],
   );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic>?toJson() => {
     "approved_at_utc": approvedAtUtc,
     "subreddit": subreddit,
     "selftext": selftext,
-    "user_reports": List<dynamic>.from(userReports!.map((x) => x)),
     "saved": saved,
     "mod_reason_title": modReasonTitle,
     "gilded": gilded,
@@ -510,7 +491,6 @@ class Data {
     "thumbnail": thumbnail,
     "edited": edited,
     "author_flair_css_class": authorFlairCssClass,
-    "author_flair_richtext": List<dynamic>.from(authorFlairRichtext!.map((x) => x)),
     "gildings": gildings!.toJson(),
     "content_categories": contentCategories,
     "is_self": isSelf,
@@ -534,15 +514,12 @@ class Data {
     "is_crosspostable": isCrosspostable,
     "pinned": pinned,
     "over_18": over18,
-    "all_awardings": List<dynamic>.from(allAwardings!.map((x) => x)),
-    "awarders": List<dynamic>.from(awarders!.map((x) => x)),
     "media_only": mediaOnly,
     "link_flair_template_id": linkFlairTemplateId,
     "can_gild": canGild,
     "spoiler": spoiler,
     "locked": locked,
     "author_flair_text": authorFlairText,
-    "treatment_tags": List<dynamic>.from(treatmentTags!.map((x) => x)),
     "visited": visited,
     "removed_by": removedBy,
     "num_reports": numReports,
@@ -571,7 +548,6 @@ class Data {
     "subreddit_subscribers": subredditSubscribers,
     "created_utc": createdUtc,
     "num_crossposts": numCrossposts,
-    "mod_reports": List<dynamic>.from(modReports!.map((x) => x)),
     "is_video": isVideo,
     "comment_type": commentType,
     "replies": replies,
@@ -595,61 +571,61 @@ class Data {
 class Gildings {
   Gildings();
 
-  factory Gildings.fromJson(Map<String, dynamic> json) => Gildings(
+  factory Gildings.fromJson(Map<String, dynamic>?json) => Gildings(
   );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic>?toJson() => {
   };
 }
 
 class LinkFlairRichtext {
   LinkFlairRichtext({
-      this.e,
-      this.t,
+    this.e,
+    this.t,
   });
 
   String? e;
   String? t;
 
-  factory LinkFlairRichtext.fromJson(Map<String, dynamic> json) => LinkFlairRichtext(
-      e: json["e"],
-      t: json["t"],
+  factory LinkFlairRichtext.fromJson(Map<String, dynamic>?json) => LinkFlairRichtext(
+    e: json?["e"],
+    t: json?["t"],
   );
 
-  Map<String, dynamic> toJson() => {
-      "e": e,
-      "t": t,
+  Map<String, dynamic>?toJson() => {
+    "e": e,
+    "t": t,
   };
 }
 
 class RepliesClass {
   RepliesClass({
-      this.kind,
-      this.data,
+    this.kind,
+    this.data,
   });
 
   String? kind;
   RepliesData? data;
 
-  factory RepliesClass.fromJson(Map<String, dynamic> json) => RepliesClass(
-      kind: json["kind"],
-      data: RepliesData.fromJson(json["data"]),
+  factory RepliesClass.fromJson(Map<String, dynamic>?json) => RepliesClass(
+    kind: json?["kind"],
+    data: RepliesData.fromJson(json?["data"]),
   );
 
-  Map<String, dynamic> toJson() => {
-      "kind": kind,
-      "data": data!.toJson(),
+  Map<String, dynamic>?toJson() => {
+    "kind": kind,
+    "data": data!.toJson(),
   };
 }
 
 class RepliesData {
   RepliesData({
-      this.after,
-      this.dist,
-      this.modhash,
-      this.geoFilter,
-      this.children,
-      this.before,
+    this.after,
+    this.dist,
+    this.modhash,
+    this.geoFilter,
+    this.children,
+    this.before,
   });
 
   dynamic after;
@@ -659,42 +635,42 @@ class RepliesData {
   List<FluffyChild>? children;
   dynamic before;
 
-  factory RepliesData.fromJson(Map<String, dynamic> json) => RepliesData(
-      after: json["after"],
-      dist: json["dist"],
-      modhash: json["modhash"],
-      geoFilter: json["geo_filter"],
-      children: List<FluffyChild>.from(json["children"].map((x) => FluffyChild.fromJson(x))),
-      before: json["before"],
+  factory RepliesData.fromJson(Map<String, dynamic>?json) => RepliesData(
+    after: json?["after"],
+    dist: json?["dist"],
+    modhash: json?["modhash"],
+    geoFilter: json?["geo_filter"],
+    children: List<FluffyChild>.from(json?["children"].map((x) => FluffyChild.fromJson(x))),
+    before: json?["before"],
   );
 
-  Map<String, dynamic> toJson() => {
-      "after": after,
-      "dist": dist,
-      "modhash": modhash,
-      "geo_filter": geoFilter,
-      "children": List<dynamic>.from(children!.map((x) => x.toJson())),
-      "before": before,
+  Map<String, dynamic>?toJson() => {
+    "after": after,
+    "dist": dist,
+    "modhash": modhash,
+    "geo_filter": geoFilter,
+    "children": List<dynamic>.from(children!.map((x) => x.toJson())),
+    "before": before,
   };
 }
 
 class FluffyChild {
   FluffyChild({
-      this.kind,
-      this.data,
+    this.kind,
+    this.data,
   });
 
   String? kind;
   FluffyData? data;
 
-  factory FluffyChild.fromJson(Map<String, dynamic> json) => FluffyChild(
-      kind: json["kind"],
-      data: FluffyData.fromJson(json["data"]),
+  factory FluffyChild.fromJson(Map<String, dynamic>?json) => FluffyChild(
+    kind: json?["kind"],
+    data: FluffyData.fromJson(json?["data"]),
   );
 
-  Map<String, dynamic> toJson() => {
-      "kind": kind,
-      "data": data!.toJson(),
+  Map<String, dynamic>?toJson() => {
+    "kind": kind,
+    "data": data!.toJson(),
   };
 }
 
@@ -704,7 +680,6 @@ class FluffyData {
     this.approvedAtUtc,
     this.authorIsBlocked,
     this.commentType,
-    this.awarders,
     this.modReasonBy,
     this.bannedBy,
     this.authorFlairType,
@@ -713,7 +688,6 @@ class FluffyData {
     this.authorFlairTemplateId,
     this.likes,
     this.replies,
-    this.userReports,
     this.saved,
     this.id,
     this.bannedAtUtc,
@@ -732,7 +706,6 @@ class FluffyData {
     this.removalReason,
     this.approvedBy,
     this.modNote,
-    this.allAwardings,
     this.body,
     this.edited,
     this.topAwardedType,
@@ -740,7 +713,6 @@ class FluffyData {
     this.name,
     this.isSubmitter,
     this.downs,
-    this.authorFlairRichtext,
     this.authorPatreonFlair,
     this.bodyHtml,
     this.gildings,
@@ -760,23 +732,20 @@ class FluffyData {
     this.reportReasons,
     this.created,
     this.authorFlairText,
-    this.treatmentTags,
     this.collapsed,
     this.subredditNamePrefixed,
     this.controversiality,
     this.depth,
     this.authorFlairBackgroundColor,
     this.collapsedBecauseCrowdControl,
-    this.modReports,
     this.numReports,
     this.ups,
   });
 
   String? subredditId;
   dynamic approvedAtUtc;
-  bool? authorIsBlocked;
+  dynamic authorIsBlocked;
   dynamic commentType;
-  List<dynamic>? awarders;
   dynamic modReasonBy;
   dynamic bannedBy;
   String? authorFlairType;
@@ -785,143 +754,131 @@ class FluffyData {
   dynamic authorFlairTemplateId;
   dynamic likes;
   String? replies;
-  List<dynamic>? userReports;
-  bool? saved;
+  dynamic saved;
   String? id;
   dynamic bannedAtUtc;
   dynamic modReasonTitle;
   int? gilded;
-  bool? archived;
+  dynamic archived;
   dynamic collapsedReasonCode;
-  bool? noFollow;
+  dynamic noFollow;
   String? author;
-  bool? canModPost;
+  dynamic canModPost;
   int? createdUtc;
-  bool? sendReplies;
+  dynamic sendReplies;
   String? parentId;
   int? score;
   String? authorFullname;
   dynamic removalReason;
   dynamic approvedBy;
   dynamic modNote;
-  List<dynamic>? allAwardings;
   String? body;
-  bool? edited;
+  dynamic edited;
   dynamic topAwardedType;
   dynamic authorFlairCssClass;
   String? name;
-  bool? isSubmitter;
+  dynamic isSubmitter;
   int? downs;
-  List<dynamic>? authorFlairRichtext;
-  bool? authorPatreonFlair;
+  dynamic authorPatreonFlair;
   String? bodyHtml;
   Gildings? gildings;
   dynamic collapsedReason;
   dynamic distinguished;
   dynamic associatedAward;
-  bool? stickied;
-  bool? authorPremium;
-  bool? canGild;
+  dynamic stickied;
+  dynamic authorPremium;
+  dynamic canGild;
   String? linkId;
   dynamic unrepliableReason;
   dynamic authorFlairTextColor;
-  bool? scoreHidden;
+  dynamic scoreHidden;
   String? permalink;
   String? subredditType;
-  bool? locked;
+  dynamic locked;
   dynamic reportReasons;
   int? created;
   dynamic authorFlairText;
-  List<dynamic>? treatmentTags;
-  bool? collapsed;
+  dynamic collapsed;
   String? subredditNamePrefixed;
   int? controversiality;
   int? depth;
   dynamic authorFlairBackgroundColor;
   dynamic collapsedBecauseCrowdControl;
-  List<dynamic>? modReports;
   dynamic numReports;
   int? ups;
 
-  factory FluffyData.fromJson(Map<String, dynamic> json) => FluffyData(
-    subredditId: json["subreddit_id"],
-    approvedAtUtc: json["approved_at_utc"],
-    authorIsBlocked: json["author_is_blocked"],
-    commentType: json["comment_type"],
-    awarders: List<dynamic>.from(json["awarders"].map((x) => x)),
-    modReasonBy: json["mod_reason_by"],
-    bannedBy: json["banned_by"],
-    authorFlairType: json["author_flair_type"],
-    totalAwardsReceived: json["total_awards_received"],
-    subreddit: json["subreddit"],
-    authorFlairTemplateId: json["author_flair_template_id"],
-    likes: json["likes"],
-    replies: json["replies"],
-    userReports: List<dynamic>.from(json["user_reports"].map((x) => x)),
-    saved: json["saved"],
-    id: json["id"],
-    bannedAtUtc: json["banned_at_utc"],
-    modReasonTitle: json["mod_reason_title"],
-    gilded: json["gilded"],
-    archived: json["archived"],
-    collapsedReasonCode: json["collapsed_reason_code"],
-    noFollow: json["no_follow"],
-    author: json["author"],
-    canModPost: json["can_mod_post"],
-    createdUtc: json["created_utc"],
-    sendReplies: json["send_replies"],
-    parentId: json["parent_id"],
-    score: json["score"],
-    authorFullname: json["author_fullname"],
-    removalReason: json["removal_reason"],
-    approvedBy: json["approved_by"],
-    modNote: json["mod_note"],
-    allAwardings: List<dynamic>.from(json["all_awardings"].map((x) => x)),
-    body: json["body"],
-    edited: json["edited"],
-    topAwardedType: json["top_awarded_type"],
-    authorFlairCssClass: json["author_flair_css_class"],
-    name: json["name"],
-    isSubmitter: json["is_submitter"],
-    downs: json["downs"],
-    authorFlairRichtext: List<dynamic>.from(json["author_flair_richtext"].map((x) => x)),
-    authorPatreonFlair: json["author_patreon_flair"],
-    bodyHtml: json["body_html"],
-    gildings: Gildings.fromJson(json["gildings"]),
-    collapsedReason: json["collapsed_reason"],
-    distinguished: json["distinguished"],
-    associatedAward: json["associated_award"],
-    stickied: json["stickied"],
-    authorPremium: json["author_premium"],
-    canGild: json["can_gild"],
-    linkId: json["link_id"],
-    unrepliableReason: json["unrepliable_reason"],
-    authorFlairTextColor: json["author_flair_text_color"],
-    scoreHidden: json["score_hidden"],
-    permalink: json["permalink"],
-    subredditType: json["subreddit_type"],
-    locked: json["locked"],
-    reportReasons: json["report_reasons"],
-    created: json["created"],
-    authorFlairText: json["author_flair_text"],
-    treatmentTags: List<dynamic>.from(json["treatment_tags"].map((x) => x)),
-    collapsed: json["collapsed"],
-    subredditNamePrefixed: json["subreddit_name_prefixed"],
-    controversiality: json["controversiality"],
-    depth: json["depth"],
-    authorFlairBackgroundColor: json["author_flair_background_color"],
-    collapsedBecauseCrowdControl: json["collapsed_because_crowd_control"],
-    modReports: List<dynamic>.from(json["mod_reports"].map((x) => x)),
-    numReports: json["num_reports"],
-    ups: json["ups"],
+  factory FluffyData.fromJson(Map<String, dynamic>?json) => FluffyData(
+    subredditId: json?["subreddit_id"],
+    approvedAtUtc: json?["approved_at_utc"],
+    authorIsBlocked: json?["author_is_blocked"],
+    commentType: json?["comment_type"],
+    modReasonBy: json?["mod_reason_by"],
+    bannedBy: json?["banned_by"],
+    authorFlairType: json?["author_flair_type"],
+    totalAwardsReceived: json?["total_awards_received"],
+    subreddit: json?["subreddit"],
+    authorFlairTemplateId: json?["author_flair_template_id"],
+    likes: json?["likes"],
+    replies: json?["replies"],
+    saved: json?["saved"],
+    id: json?["id"],
+    bannedAtUtc: json?["banned_at_utc"],
+    modReasonTitle: json?["mod_reason_title"],
+    gilded: json?["gilded"],
+    archived: json?["archived"],
+    collapsedReasonCode: json?["collapsed_reason_code"],
+    noFollow: json?["no_follow"],
+    author: json?["author"],
+    canModPost: json?["can_mod_post"],
+    createdUtc: json?["created_utc"],
+    sendReplies: json?["send_replies"],
+    parentId: json?["parent_id"],
+    score: json?["score"],
+    authorFullname: json?["author_fullname"],
+    removalReason: json?["removal_reason"],
+    approvedBy: json?["approved_by"],
+    modNote: json?["mod_note"],
+    body: json?["body"],
+    edited: json?["edited"],
+    topAwardedType: json?["top_awarded_type"],
+    authorFlairCssClass: json?["author_flair_css_class"],
+    name: json?["name"],
+    isSubmitter: json?["is_submitter"],
+    downs: json?["downs"],
+    authorPatreonFlair: json?["author_patreon_flair"],
+    bodyHtml: json?["body_html"],
+    gildings: Gildings.fromJson(json?["gildings"]),
+    collapsedReason: json?["collapsed_reason"],
+    distinguished: json?["distinguished"],
+    associatedAward: json?["associated_award"],
+    stickied: json?["stickied"],
+    authorPremium: json?["author_premium"],
+    canGild: json?["can_gild"],
+    linkId: json?["link_id"],
+    unrepliableReason: json?["unrepliable_reason"],
+    authorFlairTextColor: json?["author_flair_text_color"],
+    scoreHidden: json?["score_hidden"],
+    permalink: json?["permalink"],
+    subredditType: json?["subreddit_type"],
+    locked: json?["locked"],
+    reportReasons: json?["report_reasons"],
+    created: json?["created"],
+    authorFlairText: json?["author_flair_text"],
+    collapsed: json?["collapsed"],
+    subredditNamePrefixed: json?["subreddit_name_prefixed"],
+    controversiality: json?["controversiality"],
+    depth: json?["depth"],
+    authorFlairBackgroundColor: json?["author_flair_background_color"],
+    collapsedBecauseCrowdControl: json?["collapsed_because_crowd_control"],
+    numReports: json?["num_reports"],
+    ups: json?["ups"],
   );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic>?toJson() => {
     "subreddit_id": subredditId,
     "approved_at_utc": approvedAtUtc,
     "author_is_blocked": authorIsBlocked,
     "comment_type": commentType,
-    "awarders": List<dynamic>.from(awarders!.map((x) => x)),
     "mod_reason_by": modReasonBy,
     "banned_by": bannedBy,
     "author_flair_type": authorFlairType,
@@ -930,7 +887,6 @@ class FluffyData {
     "author_flair_template_id": authorFlairTemplateId,
     "likes": likes,
     "replies": replies,
-    "user_reports": List<dynamic>.from(userReports!.map((x) => x)),
     "saved": saved,
     "id": id,
     "banned_at_utc": bannedAtUtc,
@@ -949,7 +905,6 @@ class FluffyData {
     "removal_reason": removalReason,
     "approved_by": approvedBy,
     "mod_note": modNote,
-    "all_awardings": List<dynamic>.from(allAwardings!.map((x) => x)),
     "body": body,
     "edited": edited,
     "top_awarded_type": topAwardedType,
@@ -957,7 +912,6 @@ class FluffyData {
     "name": name,
     "is_submitter": isSubmitter,
     "downs": downs,
-    "author_flair_richtext": List<dynamic>.from(authorFlairRichtext!.map((x) => x)),
     "author_patreon_flair": authorPatreonFlair,
     "body_html": bodyHtml,
     "gildings": gildings!.toJson(),
@@ -977,14 +931,12 @@ class FluffyData {
     "report_reasons": reportReasons,
     "created": created,
     "author_flair_text": authorFlairText,
-    "treatment_tags": List<dynamic>.from(treatmentTags!.map((x) => x)),
     "collapsed": collapsed,
     "subreddit_name_prefixed": subredditNamePrefixed,
     "controversiality": controversiality,
     "depth": depth,
     "author_flair_background_color": authorFlairBackgroundColor,
     "collapsed_because_crowd_control": collapsedBecauseCrowdControl,
-    "mod_reports": List<dynamic>.from(modReports!.map((x) => x)),
     "num_reports": numReports,
     "ups": ups,
   };
