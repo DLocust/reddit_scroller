@@ -82,11 +82,43 @@ class CommentsViewState extends State<CommentsView>{
             itemBuilder: (context, index) {
               return Padding(  
                 padding: const EdgeInsets.only(bottom: 7.5),
-                child: ListTile(
-                  textColor: Colors.white,
-                  tileColor: Colors.grey[700],
-                  title: Text(comments!.data!.children![index].data!.body!),
-                  trailing: Text(comments.data!.children![index].data!.ups.toString()),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(5.0),
+                  child: ExpansionTile(
+                    textColor: Colors.white,
+                    collapsedTextColor: Colors.white,
+                    collapsedBackgroundColor: Colors.grey[700],
+                    title: Column(  
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children:[
+                        Padding(  
+                          padding: const EdgeInsets.only(top: 5, bottom: 5),
+                          child: Text(
+                            comments!.data!.children![index].data!.author!, 
+                            style: TextStyle(color: Colors.blue[300], fontWeight: FontWeight.bold),
+                          )
+                        ),
+                        Text(comments.data!.children![index].data!.body!),
+                      ]
+                    ),
+                    trailing: FittedBox(
+                      child: Padding(  
+                        padding: const EdgeInsets.only(right: 10),
+                        child: Row(  
+                          children: [
+                            const Icon(Icons.arrow_upward, color: Colors.green,),
+                              Text(
+                                comments.data!.children![index].data!.ups! > 1000 
+                                ? '${(comments.data!.children![index].data!.ups! / 1000).toStringAsFixed(1)}k'
+                                : '${comments.data!.children![index].data!.ups}', 
+                                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                              ),
+                          ],
+                        ),
+                      ),
+                    )//Text(comments.data!.children![index].data!.ups.toString()),
+                    
+                  )
                 )
               );
             },

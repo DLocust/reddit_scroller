@@ -173,7 +173,7 @@ class HomeViewState extends State<HomeView>{
                                 posts.data!.children![index].data!.ups! > 1000 
                                 ? '${(posts.data!.children![index].data!.ups! / 1000).toStringAsFixed(1)}k'
                                 : '${posts.data!.children![index].data!.ups}', 
-                                style: const TextStyle(color: Colors.white),
+                                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                               ),
                               IconButton(
                                 onPressed:(){
